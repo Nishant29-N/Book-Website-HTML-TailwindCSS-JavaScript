@@ -35,6 +35,59 @@
       .login-form-container.active {
           right: 0; /* slide in */
       }
+
+              .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 2s ease, transform 1s cubic-bezier(0.4,0,0.2,1);
+        }
+        .fade-in.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Infinite hovering animation for images */
+        @keyframes floatY {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(15px);
+                transform: translateX(15px);
+            }
+        }
+        .infinite-hover {
+            animation: floatY 3s ease-in-out infinite;
+            will-change: transform;
+        }
+        /* Add to your <style> block in index.html */
+        @keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeOutUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+        }
+        .animate-fade-in-down {
+            animation: fadeInDown 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+        .animate-fade-out-up {
+            animation: fadeOutUp 0.3s cubic-bezier(0.4,0,0.2,1);
+        }
+
+    
     </style>
   </head>
   <body
@@ -142,7 +195,7 @@
         </div>
       </nav>
       <!-- Mobile Navigation -->
-      <div class="mobile-nav-container flex justify-center items-center backdrop-blur-xl fixed top-0 z-[10000] w-full text-white" id="mobile-nav-container">
+      <div class="mobile-nav-container  flex justify-center items-center backdrop-blur-xl fixed top-0 z-[10000] w-full text-white" id="mobile-nav-container">
 
         <div id="mobile-nav" class="absolute top-0 right-[-100%] h-screen bg-gray-950 rounded-l-2xl p-6 sm:hidden transition-all duration-500 ease-in-out">
           <!-- Close Button -->
@@ -151,8 +204,8 @@
             <li><a href="#home">Home</a></li>
             <li><a href="">About</a></li>
             <li><a href="#categories">Categories</a></li>
-            <li><a href="">Contact</a></li>
-            <li><a href="#contact">Track Your Order</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="">Track Your Order</a></li>
           </ul>
         </div>
       </div>
@@ -198,17 +251,17 @@
         >
           <!-- Left Content -->
           <div class="md:w-1/2 text-left ml-0 md:ml-20">
-            <h1 class="text-5xl font-extrabold text-white leading-tight">
+            <h1 class="text-5xl font-extrabold text-white leading-tight fade-in">
               Welcome to
-              <span class="text-blue-100 text-6xl">Boundless Reads</span>
+              <span class="text-blue-100 text-6xl fade-in">Boundless Reads</span>
             </h1>
-            <p class="mt-6 text-lg text-gray-300 max-w-lg">
+            <p class="mt-6 text-lg text-gray-300 max-w-lg fade-in">
               Discover your favorite books, explore new worlds, and manage your
               collection with ease.
             </p>
 
             <!-- Buttons -->
-            <div class="mt-8 flex w-max gap-4 justify-start">
+            <div class="mt-8 flex w-max gap-4 justify-start fade-in">
               <a
                 href="#books"
                 class="px-5 py-3 rounded-lg bg-white/10 backdrop-blur-md border border-white/20 text-white font-semibold hover:bg-blue-600 hover:text-white transition-all duration-300"
@@ -231,7 +284,7 @@
             <!-- Slider container -->
             <div
               id="slider"
-              class="flex transition-transform duration-700 ease-in-out w-full h-full"
+              class="flex transition-transform duration-700 ease-in-out w-full h-full fade-in"
             >
               <img
                 src="assets/books.png"
@@ -273,10 +326,10 @@
       <div
         class="items-center justify-center flex-col bg-white/5 border-white border backdrop-blur-lg rounded-3xl md:mx-5 md:my-0 py-7 px-6 relative overflow-hidden"
       >
-        <h1 class="text-2xl font-bold text-center my-3">Shop By Categories</h1>
+        <h1 class="text-2xl font-bold text-center my-3 fade-in">Shop By Categories</h1>
 
         <!-- Slider Container -->
-        <div class="relative w-full overflow-hidden">
+        <div class="relative w-full overflow-hidden fade-in">
           <!-- Cards Wrapper -->
           <div
             id="cardSlider"
@@ -474,9 +527,9 @@
       <section
         class="bg-white/5 backdrop-blur-lg border-2 border-white/50 rounded-xl md:rounded-3xl flex-col justify-between items-center my-8 md:mx-5"
       >
-        <h1 class="text-2xl font-bold text-center p-4">Featured Books</h1>
+        <h1 class="text-2xl font-bold text-center p-4 fade-in">Featured Books</h1>
         <!-- Books Container -->
-        <div class="flex flex-wrap gap-y-3 md:mx-0 mx-2 mb-6 justify-center">
+        <div class="flex flex-wrap gap-y-3 md:mx-0 mx-2 mb-6 justify-center fade-in">
           <!-- Book Card 1 -->
           <div
             class="card w-1/2 md:w-[230px] h-max flex justify-center flex-shrink-0 px-2 cursor-pointer"
@@ -946,7 +999,7 @@
             </div>
           </div>
         </div>
-        <div class="flex my-3.5 justify-center">
+        <div class="flex my-3.5 justify-center fade-in">
           <a href="#">
             <button
               class="border px-6 py-2 rounded-md font-medium hover:bg-white/20 backdrop-blur-2xl cursor-pointer duration-300 transition-all hover:scale-[103%]"
@@ -964,11 +1017,11 @@
       <section
         class="bg-white/5 backdrop-blur-lg border-2 border-white/50 rounded-xl md:rounded-3xl flex-col justify-between items-center md:mx-5"
       >
-        <h1 class="text-xl md:text-2xl font-bold text-center p-4">
+        <h1 class="text-xl md:text-2xl font-bold text-center p-4 fade-in">
           Subscribe to Our News Letter
         </h1>
 
-        <div class="justify-center flex">
+        <div class="justify-center flex fade-in">
           <input
             type="email"
             name=""
@@ -977,7 +1030,7 @@
             id=""
           />
         </div>
-        <div class="flex justify-center my-5">
+        <div class="flex justify-center my-5 fade-in">
           <button
             class="border rounded-md px-4 py-1.5 font-bold cursor-pointer hover:bg-blue-500/80 hover:scale-[102%] duration-200 transition-all"
           >
@@ -995,7 +1048,7 @@
     >
       <section class="justify-between md:flex p-4 md:p-9">
 
-        <div class="flex w-full gap-x-8 justify-center">
+        <div class="flex w-full gap-x-8 justify-center fade-in">
           <div class="flex-col flex gap-3">
             <h3 class="font-semibold text-xl">Our Branches:</h3>
             
@@ -1017,7 +1070,7 @@
         </div>
 
         <!-- Right Footer -->
-        <div class="hidden w-full gap-x-8 md:flex  justify-center">
+        <div class="hidden w-full gap-x-8 md:flex  justify-center fade-in">
           <div class="flex-col flex gap-3">
             <h3 class="font-semibold text-xl">Contact Info:</h3>
             <a href="#" class="hover:scale-105 duration-200 hover:text-blue-100 "> <i class="fas fa-phone text-xl mr-3"></i>+123-456-7890 </a>

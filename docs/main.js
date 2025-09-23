@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Hero Section Slider
+    /** ------------------------------
+     * Fade-in for Hero + Sections
+     ------------------------------- */
   const slider = document.getElementById("slider");
   const dots = document.querySelectorAll(".dot");
   const slides = slider.children;
@@ -29,6 +31,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   showHeroSlide(heroIndex);
 
+
+
+    /** ------------------------------
+     * Shop By Category Slider
+     ------------------------------- */
   const cardSlider = document.getElementById("cardSlider");
   const prevBtn = document.getElementById("prev");
   const nextBtn = document.getElementById("next");
@@ -106,6 +113,10 @@ document.addEventListener("DOMContentLoaded", function () {
   updateSlider();
   startAutoSlide();
 
+    /** ------------------------------
+     * Login Form
+     ------------------------------- */
+
   let loginForm = document.querySelector(".login-form-container");
 
   document.querySelector("#login-btn").onclick = () => {
@@ -132,4 +143,34 @@ document.addEventListener("DOMContentLoaded", function () {
     mobileNav.style.right = "-100%";
   };
 
+
+  /** ------------------------------
+     * Fade-in for Hero + Sections
+     ------------------------------- */
+    const fadeEls = document.querySelectorAll('.fade-in');
+
+    // Add initial hero fade-in with slight delay
+    const heroText = document.querySelector('.fade-in');
+    if (heroText) {
+        setTimeout(() => {
+            heroText.classList.add('show');
+        }, 500);
+    }
+
+    // Intersection Observer for other fade-ins on scroll
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show');
+                obs.unobserve(entry.target); // run once
+            }
+        });
+    }, { threshold: 0.2 });
+
+    fadeEls.forEach(el => {
+        observer.observe(el);
+    });
+
+
 });
+
