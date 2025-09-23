@@ -36,82 +36,92 @@ document.addEventListener("DOMContentLoaded", function () {
     /** ------------------------------
      * Shop By Category Slider
      ------------------------------- */
-  const cardSlider = document.getElementById("cardSlider");
-  const prevBtn = document.getElementById("prev");
-  const nextBtn = document.getElementById("next");
-  const visibleCards = 3;
-  let currentIndex = 0;
-  let autoSlideInterval;
+const cardSlider = document.getElementById("cardSlider");
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
+const visibleCards = 3;
+let currentIndex = 0;
+let autoSlideInterval;
 
-  for (let i = 0; i < visibleCards; i++) {
-    const clone = cardSlider.children[i].cloneNode(true);
-    cardSlider.appendChild(clone);
-  }
+for (let i = 0; i < visibleCards; i++) {
+  const clone = cardSlider.children[i].cloneNode(true);
+  cardSlider.appendChild(clone);
+}
 
-  const totalCards = cardSlider.children.length;
+const totalCards = cardSlider.children.length;
 
-  function updateSlider() {
-    const cardWidth = cardSlider.children[0].offsetWidth;
-    cardSlider.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
-  }
+function updateSlider() {
+  const cardWidth = cardSlider.children[0].offsetWidth;
+  cardSlider.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+}
 
-  function goNext() {
-    currentIndex++;
-    updateSlider();
+function goNext() {
+  currentIndex++;
+  updateSlider();
 
-    if (currentIndex === totalCards - visibleCards) {
-      setTimeout(() => {
-        cardSlider.style.transition = "none";
-        currentIndex = 0;
-        updateSlider();
-        setTimeout(() => {
-          cardSlider.style.transition = "transform 0.5s ease-in-out";
-        }, 50);
-      }, 700);
-    }
-  }
-
-  function goPrev() {
-    if (currentIndex === 0) {
-      // Jump to clone end instantly
+  if (currentIndex === totalCards - visibleCards) {
+    setTimeout(() => {
       cardSlider.style.transition = "none";
-      currentIndex = totalCards - visibleCards;
+      currentIndex = 0;
       updateSlider();
       setTimeout(() => {
         cardSlider.style.transition = "transform 0.5s ease-in-out";
-        currentIndex--;
-        updateSlider();
       }, 50);
-    } else {
+    }, 700);
+  }
+}
+
+function goPrev() {
+  if (currentIndex === 0) {
+    cardSlider.style.transition = "none";
+    currentIndex = totalCards - visibleCards;
+    updateSlider();
+    setTimeout(() => {
+      cardSlider.style.transition = "transform 0.5s ease-in-out";
       currentIndex--;
       updateSlider();
-    }
+    }, 50);
+  } else {
+    currentIndex--;
+    updateSlider();
   }
+}
 
-  function startAutoSlide() {
-    autoSlideInterval = setInterval(goNext, 3000);
-  }
+function startAutoSlide() {
+  autoSlideInterval = setInterval(goNext, 3000);
+}
 
-  function stopAutoSlide() {
-    clearInterval(autoSlideInterval);
-  }
+function stopAutoSlide() {
+  clearInterval(autoSlideInterval);
+}
 
-  // Arrow buttons
-  nextBtn.addEventListener("click", () => {
-    goNext();
-    stopAutoSlide();
-    startAutoSlide();
-  });
-
-  prevBtn.addEventListener("click", () => {
-    goPrev();
-    stopAutoSlide();
-    startAutoSlide();
-  });
-
-  slider.style.transition = "transform 0.5s ease-in-out";
-  updateSlider();
+// Arrow buttons
+nextBtn.addEventListener("click", () => {
+  goNext();
+  stopAutoSlide();
   startAutoSlide();
+});
+
+prevBtn.addEventListener("click", () => {
+  goPrev();
+  stopAutoSlide();
+  startAutoSlide();
+});
+
+// 🚀 Stop autoplay when hovering over categories
+const categories = document.querySelectorAll(".category");
+categories.forEach((category) => {
+  category.addEventListener("mouseenter", stopAutoSlide);
+  category.addEventListener("mouseleave", startAutoSlide);
+});
+
+cardSlider.style.transition = "transform 0.5s ease-in-out";
+updateSlider();
+startAutoSlide();
+
+
+
+
 
     /** ------------------------------
      * Login Form
